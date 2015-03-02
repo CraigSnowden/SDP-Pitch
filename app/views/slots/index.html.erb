@@ -23,7 +23,7 @@
           <%= slot.start_time.to_formatted_s(:long) %> - <%= slot.end_time.to_formatted_s(:time) %>
         </div>
         <div class="small-9 columns">
-          <%= f.collection_select :group_id, Group.all, :id, :name %>
+          <%= f.collection_select :group_id, Group.all, :id, :name, include_blank: " " %>
         </div>
       </div>
     </div>
