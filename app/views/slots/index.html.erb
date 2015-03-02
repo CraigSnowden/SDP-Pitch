@@ -1,0 +1,37 @@
+<% if flash[:error] %>
+  <div id="error_explanation" class="panel">
+    <h2><%= pluralize(flash[:error].count, "error") %> prohibited this assignment from being saved:</h2>
+
+    <ul>
+    <% flash[:error].each do |atr, msg| %>
+      <li><%= atr %> <%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<h1>SDP Pitch Booking</h1>
+<ul>
+  <li>Each group can hold one booking at a time</li>
+  <li>You must wait until your booking has started in order to make another booking</li>
+</ul>
+<% @slots.each do |slot| %>
+  <%= form_for slot, url: slot_path(slot.id) do |f| %>
+  <div class="row">
+    <div class="small-8">
+      <div class="row <%= "disabled" if slot.end_time > Time.now %>">
+        <div class="small-3 columns">
+          <%= slot.start_time.to_formatted_s(:long) %> - <%= slot.end_time.to_formatted_s(:time) %>
+        </div>
+        <div class="small-9 columns">
+          <%= f.collection_select :group_id, Group.all, :id, :name %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+<% end %>
+<script>
+  $("select").change(function() {
+    $(this).parents("form").submit();
+  });
+</script>
