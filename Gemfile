@@ -29,8 +29,8 @@ gem 'formtastic', '~> 3.0'
 
 gem 'foundation-rails'
 
-gem 'activeadmin', github: 'activeadmin'
 gem "devise"
+gem 'activeadmin', github: 'activeadmin'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
