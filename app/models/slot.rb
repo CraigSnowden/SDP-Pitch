@@ -1,5 +1,6 @@
 class Slot < ActiveRecord::Base
   belongs_to :group
+  belongs_to :room
   validate :group_ineligible_for_assignment, :cant_reassign_group
   validates :start_time, :end_time, presence: true
 

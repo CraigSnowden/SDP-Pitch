@@ -1,8 +1,10 @@
 class SlotsController < ApplicationController
   respond_to :html
   def index
-    @slots = Slot.all
-    respond_with @slots
+    params["room_id"] ||= '1'
+    @rooms = Room.all
+    @room = Room.find(params["room_id"])
+    respond_with @room
   end
 
   def update
