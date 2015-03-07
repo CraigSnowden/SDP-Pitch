@@ -7,6 +7,11 @@ class SlotsController < ApplicationController
     respond_with @room
   end
 
+  def view
+    @rooms = Room.all
+    respond_with @rooms
+  end
+
   def update
     @slot = Slot.find(params[:id])
     begin
