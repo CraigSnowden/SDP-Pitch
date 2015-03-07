@@ -19,3 +19,5 @@
    max-width: 80rem;
    margin-bottom: 20px;
  }
+
+select { margin: 0 !important; }

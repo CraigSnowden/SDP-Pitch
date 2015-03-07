@@ -39,7 +39,11 @@
             <%= slot.start_time.to_formatted_s(:long) %> - <%= slot.end_time.to_formatted_s(:time) %>
           </td>
           <td>
-            <%= f.collection_select :group_id, Group.all, :id, :name, include_blank: " " %>
+            <%= if slot.end_time > Time.now
+              f.collection_select :group_id, Group.all, :id, :name, include_blank: " "
+            else
+              slot.group.name unless slot.group.nil?
+            end %>
           </td>
         </tr>
       <% end %>
