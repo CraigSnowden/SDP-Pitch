@@ -3,7 +3,8 @@ class Slot < ActiveRecord::Base
   belongs_to :room
   validate :group_ineligible_for_assignment, :cant_reassign_group
   validates :start_time, :end_time, presence: true
-
+  default_scope -> {order("start_time ASC")}
+  
   def group_ineligible_for_assignment
     unless group.nil? or not changes.include?("group_id")
       if group.slots.where("start_time > ?", Time.now).count > 0
