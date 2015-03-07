@@ -23,23 +23,30 @@
 </dl>
 
 <h2><%= @room.name %></h2>
-
-<% @room.slots.each do |slot| %>
-  <%= form_for slot, url: slot_path(slot.id) do |f| %>
-  <div class="row">
-    <div class="small-8">
-      <div class="row <%= "disabled" if slot.end_time > Time.now %>">
-        <div class="small-4 columns">
-          <%= slot.start_time.to_formatted_s(:long) %> - <%= slot.end_time.to_formatted_s(:time) %>
-        </div>
-        <div class="small-8 columns">
-          <%= f.collection_select :group_id, Group.all, :id, :name, include_blank: " " %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <% end %>
-<% end %>
+<div class="small-12 columns">
+<table>
+  <thead>
+    <tr>
+      <th width="250">Time</th>
+      <th width="500">Group</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @room.slots.each do |slot| %>
+      <%= form_for slot, url: slot_path(slot.id) do |f| %>
+        <tr>
+          <td>
+            <%= slot.start_time.to_formatted_s(:long) %> - <%= slot.end_time.to_formatted_s(:time) %>
+          </td>
+          <td>
+            <%= f.collection_select :group_id, Group.all, :id, :name, include_blank: " " %>
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+</div>
 <script>
   $("select").change(function() {
     $(this).parents("form").submit();
